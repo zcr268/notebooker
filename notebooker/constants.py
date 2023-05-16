@@ -85,6 +85,7 @@ class NotebookResultBase(object):
     stdout = attr.ib(default=attr.Factory(list))
     scheduler_job_id = attr.ib(default=None)
     mailfrom = attr.ib(default=None)
+    email_subject = attr.ib(default=None)
     is_slideshow = attr.ib(default=False)
 
     def saveable_output(self):
@@ -104,6 +105,7 @@ class NotebookResultPending(NotebookResultBase):
     hide_code = attr.ib(default=False)
     scheduler_job_id = attr.ib(default=None)
     mailfrom = attr.ib(default=None)
+    email_subject = attr.ib(default=None)
     is_slideshow = attr.ib(default=False)
 
 
@@ -119,11 +121,8 @@ class NotebookResultError(NotebookResultBase):
     hide_code = attr.ib(default=False)
     scheduler_job_id = attr.ib(default=None)
     mailfrom = attr.ib(default=None)
+    email_subject = attr.ib(default=None)
     is_slideshow = attr.ib(default=False)
-
-    @property
-    def email_subject(self):
-        return ""
 
     @property
     def raw_html(self):
@@ -155,12 +154,12 @@ class NotebookResultComplete(NotebookResultBase):
     report_title = attr.ib(default="")
     overrides = attr.ib(default=attr.Factory(dict))
     mailto = attr.ib(default="")
-    email_subject = attr.ib(default="")
     generate_pdf_output = attr.ib(default=True)
     hide_code = attr.ib(default=False)
     stdout = attr.ib(default=attr.Factory(list))
     scheduler_job_id = attr.ib(default=None)
     mailfrom = attr.ib(default=None)
+    email_subject = attr.ib(default=None)
     is_slideshow = attr.ib(default=False)
 
     def html_resources(self):

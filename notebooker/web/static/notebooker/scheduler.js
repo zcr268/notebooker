@@ -140,6 +140,7 @@ function modifySchedulerModal(row) {
             generate_pdf: row.params.generate_pdf,
             mailto: row.params.mailto,
             mailfrom: row.params.mailfrom,
+            email_subject: row.params.email_subject,
             cronSchedule: row.cron_schedule,
             is_slideshow: row.params.is_slideshow,
         }
@@ -167,6 +168,7 @@ function handleAddButtonClick() {
             generate_pdf: "",
             mailto: "",
             mailfrom: "",
+            email_subject: "",
             cronSchedule: "",
             is_slideshow: "",
         }
@@ -269,6 +271,7 @@ $(document).ready(() => {
                     cron_schedule: formObj.cronSchedule,
                     mailto: formObj.mailto,
                     mailfrom: formObj.mailfrom,
+                    email_subject: formObj.email_subject,
                     generate_pdf: formObj.generate_pdf,
                     hide_code: formObj.hide_code,
                     is_slideshow: formObj.is_slideshow,

@@ -24,7 +24,11 @@ def send_result_email(result: Union[NotebookResultComplete, NotebookResultError]
     report_title = (
         result.report_title.decode("utf-8") if isinstance(result.report_title, bytes) else result.report_title
     )
-    subject = result.email_subject or f"Notebooker: {report_title} report completed with status: {result.status.value}"
+    default_subject = f"Notebooker: {report_title} report completed with status: {result.status.value}"
+    if isinstance(result, NotebookResultComplete):
+        subject = result.email_subject or default_subject
+    else:
+        subject = default_subject
     body = result.email_html or result.raw_html
     attachments = []
     tmp_dir = None

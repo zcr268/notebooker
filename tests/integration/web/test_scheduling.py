@@ -21,6 +21,7 @@ def test_create_schedule(flask_app, setup_workspace, report_name):
                 "is_slideshow": True,
                 "cron_schedule": "* * * * *",
                 "mailfrom": "test@example.com",
+                "email_subject": "Subject",
             },
         )
         assert rv.status_code == 201
@@ -40,6 +41,7 @@ def test_create_schedule(flask_app, setup_workspace, report_name):
                 "is_slideshow": True,
                 "scheduler_job_id": f"{report_name}_test2",
                 "mailfrom": "test@example.com",
+                "email_subject": "Subject",
             },
             "trigger": {
                 "fields": {

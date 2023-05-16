@@ -127,6 +127,7 @@ class RunReportParams(NamedTuple):
     hide_code: bool
     scheduler_job_id: Optional[str]
     is_slideshow: bool
+    email_subject: Optional[str]
 
 
 def validate_run_params(report_name, params, issues: List[str]) -> RunReportParams:
@@ -140,6 +141,7 @@ def validate_run_params(report_name, params, issues: List[str]) -> RunReportPara
     generate_pdf_output = params.get("generate_pdf") in ("on", "True", True)
     hide_code = params.get("hide_code") in ("on", "True", True)
     is_slideshow = params.get("is_slideshow") in ("on", "True", True)
+    email_subject = validate_title(params.get("email_subject") or "", issues)
 
     out = RunReportParams(
         report_title=report_title,
@@ -149,6 +151,7 @@ def validate_run_params(report_name, params, issues: List[str]) -> RunReportPara
         hide_code=hide_code,
         scheduler_job_id=params.get("scheduler_job_id"),
         is_slideshow=is_slideshow,
+        email_subject=email_subject,
     )
     logger.info(f"Validated params: {out}")
     return out
@@ -170,6 +173,7 @@ def _handle_run_report(
         f"hide_code={params.hide_code} "
         f"scheduler_job_id={params.scheduler_job_id} "
         f"mailfrom={params.mailfrom} "
+        f"email_subject={params.email_subject} "
         f"is_slideshow={params.is_slideshow} "
     )
     try:
@@ -185,6 +189,7 @@ def _handle_run_report(
                 hide_code=params.hide_code,
                 scheduler_job_id=params.scheduler_job_id,
                 mailfrom=params.mailfrom,
+                email_subject=params.email_subject,
                 is_slideshow=params.is_slideshow,
             )
             return (
@@ -249,6 +254,7 @@ def _rerun_report(job_id, prepare_only=False, run_synchronously=False):
         scheduler_job_id=None,  # the scheduler will never call rerun
         run_synchronously=run_synchronously,
         is_slideshow=result.is_slideshow,
+        email_subject=result.email_subject,
     )
     return new_job_id
 

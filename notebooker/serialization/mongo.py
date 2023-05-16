@@ -191,6 +191,7 @@ class MongoResultSerializer(ABC):
         hide_code: bool = False,
         scheduler_job_id: Optional[str] = None,
         is_slideshow: bool = False,
+        email_subject: Optional[str] = None,
     ) -> None:
         """Call this when we are just starting a check. Saves a "pending" job into storage."""
         job_start_time = job_start_time or datetime.datetime.now()
@@ -202,6 +203,7 @@ class MongoResultSerializer(ABC):
             job_start_time=job_start_time,
             report_name=report_name,
             mailto=mailto,
+            email_subject=email_subject,
             generate_pdf_output=generate_pdf_output,
             overrides=overrides or {},
             hide_code=hide_code,
@@ -303,6 +305,7 @@ class MongoResultSerializer(ABC):
                 stdout=result.get("stdout", []),
                 scheduler_job_id=result.get("scheduler_job_id", None),
                 is_slideshow=result.get("is_slideshow", False),
+                email_subject=result.get("email_subject", None),
             )
         elif cls == NotebookResultPending:
             return NotebookResultPending(
@@ -315,6 +318,7 @@ class MongoResultSerializer(ABC):
                 generate_pdf_output=result.get("generate_pdf_output", True),
                 report_title=result.get("report_title", result["report_name"]),
                 mailto=result.get("mailto", ""),
+                email_subject=result.get("email_subject", ""),
                 hide_code=result.get("hide_code", False),
                 stdout=result.get("stdout", []),
                 scheduler_job_id=result.get("scheduler_job_id", None),
@@ -338,6 +342,7 @@ class MongoResultSerializer(ABC):
                 generate_pdf_output=result.get("generate_pdf_output", True),
                 report_title=result.get("report_title", result["report_name"]),
                 mailto=result.get("mailto", ""),
+                email_subject=result.get("email_subject", ""),
                 hide_code=result.get("hide_code", False),
                 stdout=result.get("stdout", []),
                 scheduler_job_id=result.get("scheduler_job_id", False),
