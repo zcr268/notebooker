@@ -66,9 +66,7 @@ def start_app(webapp_config: WebappConfig):
 
 
 def create_app(webapp_config=None):
-    import pkg_resources
-
-    flask_app = Flask(__name__, template_folder=f"{pkg_resources.resource_filename(__name__, 'templates')}")
+    flask_app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), "templates"))
 
     flask_app.url_map.converters["date"] = DateConverter
     flask_app.register_blueprint(index_bp)
