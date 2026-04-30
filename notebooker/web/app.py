@@ -42,7 +42,6 @@ def _cancel_all_jobs():
 
 @atexit.register
 def _cleanup_on_exit():
-    global all_report_refresher
     if "pytest" in sys.modules or not all_report_refresher:
         return
     os.environ["NOTEBOOKER_APP_STOPPING"] = "1"
