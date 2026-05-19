@@ -1,8 +1,8 @@
+import os
 from logging import getLogger
 from typing import Optional
 
 import nbformat
-import pkg_resources
 from nbconvert import HTMLExporter
 from traitlets.config import Config
 
@@ -55,9 +55,7 @@ def _get_preview(
     conf = Config()
     if parameters_idx is not None:
         # Use this template to highlight the cell with parameters
-        conf.HTMLExporter.template_file = pkg_resources.resource_filename(
-            __name__, "../nbtemplates/notebook_preview.tpl"
-        )
+        conf.HTMLExporter.template_file = os.path.join(os.path.dirname(__file__), "../nbtemplates/notebook_preview.tpl")
     exporter = HTMLExporter(config=conf)
     html, _ = exporter.from_notebook_node(nb) if nb["cells"] else ("", "")
     set_cache(("preview", template_name), html, timeout=30)
