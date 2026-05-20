@@ -177,7 +177,7 @@ commands:
             pip install twine
             export TWINE_USERNAME='__token__'
             export TWINE_PASSWORD=$PYPI_TOKEN
-            twine upload --skip-existing dist/*
+            twine upload --verbose --skip-existing dist/*
           fi
     - store_test_results:
         path: test-results

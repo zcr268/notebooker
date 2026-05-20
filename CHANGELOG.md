@@ -1,4 +1,4 @@
-0.7.3 (2026-05-01)
+0.7.3 (2026-05-20)
 ------------------
 
 * breaking: namespace packages (`notebooker` and `notebooker.serializers`) now use `pkgutil.extend_path` instead of `pkg_resources.declare_namespace`. Plugins contributing to the `notebooker.serializers` namespace must update their own `__init__.py` files to use `pkgutil.extend_path` and remove `namespace_packages` from their `setup.py`.
