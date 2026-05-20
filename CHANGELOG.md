@@ -1,3 +1,8 @@
+0.7.4 (unreleased)
+------------------
+
+* Bugfix: Encode cloned report parameters in the results page URL so values containing `#` are preserved. (#210)
+
 0.7.3 (2026-05-20)
 ------------------
 
